@@ -9,7 +9,7 @@ Cloud-based Web GIS for mapping and analyzing spatial accessibility to health fa
 - **5km service area analysis** completed
 
 ## Live Map
-[View Interactive Map](https://bree479.github.io/nairobi-health-accessibility-gis/#11/)
+[View Interactive Map](https://bree479.github.io/nairobi-health-accessibility-gis/#11/){:target="_blank"}
 
 ## Technologies Used
 - PostgreSQL/PostGIS (Neon cloud database)
