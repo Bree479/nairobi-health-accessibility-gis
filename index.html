@@ -4,11 +4,6 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-
-    <title>Nairobi Health Facility Accessibility Map</title>
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
-		
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
@@ -30,7 +25,8 @@
         <title></title>
     </head>
     <body>
-        <div style="
+
+<div style="
     position: absolute;
     top: 10px;
     left: 50%;
@@ -51,6 +47,7 @@
         5km Service Areas • 505 Facilities • 95 km² Underserved
     </p>
 </div>
+
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
@@ -67,15 +64,16 @@
         <script src="js/leaflet.photon.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="js/leaflet-search.js"></script>
-        <script src="data/NairobiCountyBoundary_1.js"></script>
-        <script src="data/UnderservedAreas_2.js"></script>
-        <script src="data/ServiceAreas5KM_3.js"></script>
-        <script src="data/Roads_4.js"></script>
-        <script src="data/HealthFacilities_5.js"></script>
+        <script src="data/PopulationDensity_1.js"></script>
+        <script src="data/NairobiCountyBoundary_2.js"></script>
+        <script src="data/UnderservedAreas_3.js"></script>
+        <script src="data/ServiceAreas5KM_4.js"></script>
+        <script src="data/Roads_5.js"></script>
+        <script src="data/HealthFacilities_6.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[-1.4517181096620262,36.55874694424181],[-1.1300861564258589,37.205638278758165]]);
+        }).fitBounds([[-1.4572832360850412,36.5916016180363],[-1.135651282848849,37.2384929525527]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/qgis2web/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -168,7 +166,89 @@
         });
         layer_Basemap_0;
         map.addLayer(layer_Basemap_0);
-        function pop_NairobiCountyBoundary_1(feature, layer) {
+        function pop_PopulationDensity_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(String(feature.properties['fid']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Population'] !== null ? autolinker.link(String(feature.properties['Population']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_PopulationDensity_1_0(feature) {
+            if (feature.properties['Population'] >= 0.000000 && feature.properties['Population'] <= 3.000000 ) {
+                return {
+                pane: 'pane_PopulationDensity_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(13,8,135,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['Population'] >= 3.000000 && feature.properties['Population'] <= 5.000000 ) {
+                return {
+                pane: 'pane_PopulationDensity_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(126,3,168,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['Population'] >= 5.000000 && feature.properties['Population'] <= 10.000000 ) {
+                return {
+                pane: 'pane_PopulationDensity_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,71,120,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['Population'] >= 10.000000 && feature.properties['Population'] <= 23.000000 ) {
+                return {
+                pane: 'pane_PopulationDensity_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,149,65,1.0)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['Population'] >= 23.000000 && feature.properties['Population'] <= 401.000000 ) {
+                return {
+                pane: 'pane_PopulationDensity_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,249,33,1.0)',
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_PopulationDensity_1');
+        map.getPane('pane_PopulationDensity_1').style.zIndex = 401;
+        map.getPane('pane_PopulationDensity_1').style['mix-blend-mode'] = 'normal';
+        var layer_PopulationDensity_1 = new L.geoJson(json_PopulationDensity_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_PopulationDensity_1',
+            layerName: 'layer_PopulationDensity_1',
+            pane: 'pane_PopulationDensity_1',
+            onEachFeature: pop_PopulationDensity_1,
+            style: style_PopulationDensity_1_0,
+        });
+        bounds_group.addLayer(layer_PopulationDensity_1);
+        map.addLayer(layer_PopulationDensity_1);
+        function pop_NairobiCountyBoundary_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ogc_fid'] !== null ? autolinker.link(String(feature.properties['ogc_fid']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -208,9 +288,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_NairobiCountyBoundary_1_0() {
+        function style_NairobiCountyBoundary_2_0() {
             return {
-                pane: 'pane_NairobiCountyBoundary_1',
+                pane: 'pane_NairobiCountyBoundary_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -221,25 +301,25 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_NairobiCountyBoundary_1');
-        map.getPane('pane_NairobiCountyBoundary_1').style.zIndex = 401;
-        map.getPane('pane_NairobiCountyBoundary_1').style['mix-blend-mode'] = 'normal';
-        var layer_NairobiCountyBoundary_1 = new L.geoJson(json_NairobiCountyBoundary_1, {
+        map.createPane('pane_NairobiCountyBoundary_2');
+        map.getPane('pane_NairobiCountyBoundary_2').style.zIndex = 402;
+        map.getPane('pane_NairobiCountyBoundary_2').style['mix-blend-mode'] = 'normal';
+        var layer_NairobiCountyBoundary_2 = new L.geoJson(json_NairobiCountyBoundary_2, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_NairobiCountyBoundary_1',
-            layerName: 'layer_NairobiCountyBoundary_1',
-            pane: 'pane_NairobiCountyBoundary_1',
-            onEachFeature: pop_NairobiCountyBoundary_1,
-            style: style_NairobiCountyBoundary_1_0,
+            dataVar: 'json_NairobiCountyBoundary_2',
+            layerName: 'layer_NairobiCountyBoundary_2',
+            pane: 'pane_NairobiCountyBoundary_2',
+            onEachFeature: pop_NairobiCountyBoundary_2,
+            style: style_NairobiCountyBoundary_2_0,
         });
-        bounds_group.addLayer(layer_NairobiCountyBoundary_1);
-        map.addLayer(layer_NairobiCountyBoundary_1);
-        function pop_UnderservedAreas_2(feature, layer) {
+        bounds_group.addLayer(layer_NairobiCountyBoundary_2);
+        map.addLayer(layer_NairobiCountyBoundary_2);
+        function pop_UnderservedAreas_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">underserved_area_sqkm</th>\
-                        <td>' + (feature.properties['underserved_area_sqkm'] !== null ? autolinker.link(String(feature.properties['underserved_area_sqkm']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <td class="visible-with-data" id="underserved_area_sqkm">' + (feature.properties['underserved_area_sqkm'] !== null ? autolinker.link(String(feature.properties['underserved_area_sqkm']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -249,9 +329,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_UnderservedAreas_2_0() {
+        function style_UnderservedAreas_3_0() {
             return {
-                pane: 'pane_UnderservedAreas_2',
+                pane: 'pane_UnderservedAreas_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '10.0,2.0',
@@ -264,21 +344,21 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_UnderservedAreas_2');
-        map.getPane('pane_UnderservedAreas_2').style.zIndex = 402;
-        map.getPane('pane_UnderservedAreas_2').style['mix-blend-mode'] = 'normal';
-        var layer_UnderservedAreas_2 = new L.geoJson(json_UnderservedAreas_2, {
+        map.createPane('pane_UnderservedAreas_3');
+        map.getPane('pane_UnderservedAreas_3').style.zIndex = 403;
+        map.getPane('pane_UnderservedAreas_3').style['mix-blend-mode'] = 'normal';
+        var layer_UnderservedAreas_3 = new L.geoJson(json_UnderservedAreas_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_UnderservedAreas_2',
-            layerName: 'layer_UnderservedAreas_2',
-            pane: 'pane_UnderservedAreas_2',
-            onEachFeature: pop_UnderservedAreas_2,
-            style: style_UnderservedAreas_2_0,
+            dataVar: 'json_UnderservedAreas_3',
+            layerName: 'layer_UnderservedAreas_3',
+            pane: 'pane_UnderservedAreas_3',
+            onEachFeature: pop_UnderservedAreas_3,
+            style: style_UnderservedAreas_3_0,
         });
-        bounds_group.addLayer(layer_UnderservedAreas_2);
-        map.addLayer(layer_UnderservedAreas_2);
-        function pop_ServiceAreas5KM_3(feature, layer) {
+        bounds_group.addLayer(layer_UnderservedAreas_3);
+        map.addLayer(layer_UnderservedAreas_3);
+        function pop_ServiceAreas5KM_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(String(feature.properties['id']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -297,9 +377,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_ServiceAreas5KM_3_0() {
+        function style_ServiceAreas5KM_4_0() {
             return {
-                pane: 'pane_ServiceAreas5KM_3',
+                pane: 'pane_ServiceAreas5KM_4',
                 stroke: false, 
                 fill: true,
                 fillOpacity: 1,
@@ -307,21 +387,21 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_ServiceAreas5KM_3');
-        map.getPane('pane_ServiceAreas5KM_3').style.zIndex = 403;
-        map.getPane('pane_ServiceAreas5KM_3').style['mix-blend-mode'] = 'normal';
-        var layer_ServiceAreas5KM_3 = new L.geoJson(json_ServiceAreas5KM_3, {
+        map.createPane('pane_ServiceAreas5KM_4');
+        map.getPane('pane_ServiceAreas5KM_4').style.zIndex = 404;
+        map.getPane('pane_ServiceAreas5KM_4').style['mix-blend-mode'] = 'normal';
+        var layer_ServiceAreas5KM_4 = new L.geoJson(json_ServiceAreas5KM_4, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_ServiceAreas5KM_3',
-            layerName: 'layer_ServiceAreas5KM_3',
-            pane: 'pane_ServiceAreas5KM_3',
-            onEachFeature: pop_ServiceAreas5KM_3,
-            style: style_ServiceAreas5KM_3_0,
+            dataVar: 'json_ServiceAreas5KM_4',
+            layerName: 'layer_ServiceAreas5KM_4',
+            pane: 'pane_ServiceAreas5KM_4',
+            onEachFeature: pop_ServiceAreas5KM_4,
+            style: style_ServiceAreas5KM_4_0,
         });
-        bounds_group.addLayer(layer_ServiceAreas5KM_3);
-        map.addLayer(layer_ServiceAreas5KM_3);
-        function pop_Roads_4(feature, layer) {
+        bounds_group.addLayer(layer_ServiceAreas5KM_4);
+        map.addLayer(layer_ServiceAreas5KM_4);
+        function pop_Roads_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(String(feature.properties['id']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -346,11 +426,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Roads_4_0(feature) {
+        function style_Roads_5_0(feature) {
             switch(String(feature.properties['road_type'])) {
                 case 'primary':
                     return {
-                pane: 'pane_Roads_4',
+                pane: 'pane_Roads_5',
                 opacity: 1,
                 color: 'rgba(227,26,28,1.0)',
                 dashArray: '',
@@ -363,7 +443,7 @@
                     break;
                 case 'secondary':
                     return {
-                pane: 'pane_Roads_4',
+                pane: 'pane_Roads_5',
                 opacity: 1,
                 color: 'rgba(255,127,0,1.0)',
                 dashArray: '',
@@ -376,7 +456,7 @@
                     break;
                 case 'tertiary':
                     return {
-                pane: 'pane_Roads_4',
+                pane: 'pane_Roads_5',
                 opacity: 1,
                 color: 'rgba(168,168,168,1.0)',
                 dashArray: '',
@@ -389,21 +469,21 @@
                     break;
             }
         }
-        map.createPane('pane_Roads_4');
-        map.getPane('pane_Roads_4').style.zIndex = 404;
-        map.getPane('pane_Roads_4').style['mix-blend-mode'] = 'normal';
-        var layer_Roads_4 = new L.geoJson(json_Roads_4, {
+        map.createPane('pane_Roads_5');
+        map.getPane('pane_Roads_5').style.zIndex = 405;
+        map.getPane('pane_Roads_5').style['mix-blend-mode'] = 'normal';
+        var layer_Roads_5 = new L.geoJson(json_Roads_5, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Roads_4',
-            layerName: 'layer_Roads_4',
-            pane: 'pane_Roads_4',
-            onEachFeature: pop_Roads_4,
-            style: style_Roads_4_0,
+            dataVar: 'json_Roads_5',
+            layerName: 'layer_Roads_5',
+            pane: 'pane_Roads_5',
+            onEachFeature: pop_Roads_5,
+            style: style_Roads_5_0,
         });
-        bounds_group.addLayer(layer_Roads_4);
-        map.addLayer(layer_Roads_4);
-        function pop_HealthFacilities_5(feature, layer) {
+        bounds_group.addLayer(layer_Roads_5);
+        map.addLayer(layer_Roads_5);
+        function pop_HealthFacilities_6(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(String(feature.properties['id']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -435,11 +515,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_HealthFacilities_5_0(feature) {
+        function style_HealthFacilities_6_0(feature) {
             switch(String(feature.properties['facility_type'])) {
                 case 'hospital':
                     return {
-                pane: 'pane_HealthFacilities_5',
+                pane: 'pane_HealthFacilities_6',
                 radius: 6.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -455,7 +535,7 @@
                     break;
                 case 'clinic':
                     return {
-                pane: 'pane_HealthFacilities_5',
+                pane: 'pane_HealthFacilities_6',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -471,7 +551,7 @@
                     break;
                 case 'doctors':
                     return {
-                pane: 'pane_HealthFacilities_5',
+                pane: 'pane_HealthFacilities_6',
                 radius: 3.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -487,26 +567,26 @@
                     break;
             }
         }
-        map.createPane('pane_HealthFacilities_5');
-        map.getPane('pane_HealthFacilities_5').style.zIndex = 405;
-        map.getPane('pane_HealthFacilities_5').style['mix-blend-mode'] = 'normal';
-        var layer_HealthFacilities_5 = new L.geoJson(json_HealthFacilities_5, {
+        map.createPane('pane_HealthFacilities_6');
+        map.getPane('pane_HealthFacilities_6').style.zIndex = 406;
+        map.getPane('pane_HealthFacilities_6').style['mix-blend-mode'] = 'normal';
+        var layer_HealthFacilities_6 = new L.geoJson(json_HealthFacilities_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_HealthFacilities_5',
-            layerName: 'layer_HealthFacilities_5',
-            pane: 'pane_HealthFacilities_5',
-            onEachFeature: pop_HealthFacilities_5,
+            dataVar: 'json_HealthFacilities_6',
+            layerName: 'layer_HealthFacilities_6',
+            pane: 'pane_HealthFacilities_6',
+            onEachFeature: pop_HealthFacilities_6,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_HealthFacilities_5_0(feature));
+                return L.circleMarker(latlng, style_HealthFacilities_6_0(feature));
             },
         });
-        bounds_group.addLayer(layer_HealthFacilities_5);
-        map.addLayer(layer_HealthFacilities_5);
+        bounds_group.addLayer(layer_HealthFacilities_6);
+        map.addLayer(layer_HealthFacilities_6);
         const url = {"Nominatim OSM": "https://nominatim.openstreetmap.org/search?format=geojson&addressdetails=1&",
         "France BAN": "https://api-adresse.data.gouv.fr/search/?"}
         var photonControl = L.control.photon({
@@ -561,11 +641,12 @@
             }
         });
         var overlaysTree = [
-            {label: 'Health Facilities<br /><table><tr><td style="text-align: center;"><img src="legend/HealthFacilities_5_hospital0.png" /></td><td>hospital</td></tr><tr><td style="text-align: center;"><img src="legend/HealthFacilities_5_clinic1.png" /></td><td>clinic</td></tr><tr><td style="text-align: center;"><img src="legend/HealthFacilities_5_doctors2.png" /></td><td>doctors</td></tr></table>', layer: layer_HealthFacilities_5},
-            {label: 'Roads<br /><table><tr><td style="text-align: center;"><img src="legend/Roads_4_primary0.png" /></td><td>primary</td></tr><tr><td style="text-align: center;"><img src="legend/Roads_4_secondary1.png" /></td><td>secondary</td></tr><tr><td style="text-align: center;"><img src="legend/Roads_4_tertiary2.png" /></td><td>tertiary</td></tr></table>', layer: layer_Roads_4},
-            {label: '<img src="legend/ServiceAreas5KM_3.png" /> Service Areas - 5KM', layer: layer_ServiceAreas5KM_3},
-            {label: '<img src="legend/UnderservedAreas_2.png" /> Underserved Areas', layer: layer_UnderservedAreas_2},
-            {label: '<img src="legend/NairobiCountyBoundary_1.png" /> Nairobi County Boundary', layer: layer_NairobiCountyBoundary_1},
+            {label: 'Health Facilities<br /><table><tr><td style="text-align: center;"><img src="legend/HealthFacilities_6_hospital0.png" /></td><td>hospital</td></tr><tr><td style="text-align: center;"><img src="legend/HealthFacilities_6_clinic1.png" /></td><td>clinic</td></tr><tr><td style="text-align: center;"><img src="legend/HealthFacilities_6_doctors2.png" /></td><td>doctors</td></tr></table>', layer: layer_HealthFacilities_6},
+            {label: 'Roads<br /><table><tr><td style="text-align: center;"><img src="legend/Roads_5_primary0.png" /></td><td>primary</td></tr><tr><td style="text-align: center;"><img src="legend/Roads_5_secondary1.png" /></td><td>secondary</td></tr><tr><td style="text-align: center;"><img src="legend/Roads_5_tertiary2.png" /></td><td>tertiary</td></tr></table>', layer: layer_Roads_5},
+            {label: '<img src="legend/ServiceAreas5KM_4.png" /> Service Areas - 5KM', layer: layer_ServiceAreas5KM_4},
+            {label: '<img src="legend/UnderservedAreas_3.png" /> Underserved Areas', layer: layer_UnderservedAreas_3},
+            {label: '<img src="legend/NairobiCountyBoundary_2.png" /> Nairobi County Boundary', layer: layer_NairobiCountyBoundary_2},
+            {label: 'Population Density<br /><table><tr><td style="text-align: center;"><img src="legend/PopulationDensity_1_VeryLow0.png" /></td><td>Very Low</td></tr><tr><td style="text-align: center;"><img src="legend/PopulationDensity_1_Low1.png" /></td><td>Low</td></tr><tr><td style="text-align: center;"><img src="legend/PopulationDensity_1_Moderate2.png" /></td><td>Moderate</td></tr><tr><td style="text-align: center;"><img src="legend/PopulationDensity_1_High3.png" /></td><td>High</td></tr><tr><td style="text-align: center;"><img src="legend/PopulationDensity_1_VeryHigh4.png" /></td><td>Very High</td></tr></table>', layer: layer_PopulationDensity_1},
             {label: "Basemap", layer: layer_Basemap_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -629,7 +710,7 @@
         });       
         setBounds();
         map.addControl(new L.Control.Search({
-            layer: layer_HealthFacilities_5,
+            layer: layer_HealthFacilities_6,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'name'}));
