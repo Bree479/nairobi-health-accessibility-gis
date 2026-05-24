@@ -9,7 +9,7 @@ Cloud-based Web GIS for mapping and analyzing spatial accessibility to health fa
 - **5km service area analysis** completed
 
 ## Live Map
-[View Interactive Map]([https://YOUR_USERNAME.github.io/nairobi-health-accessibility-gis/webmap/](https://bree479.github.io/nairobi-health-accessibility-gis))
+[View Interactive Map]([https://bree479.github.io/nairobi-health-accessibility-gis/])
 
 ## Technologies Used
 - PostgreSQL/PostGIS (Neon cloud database)
@@ -20,8 +20,8 @@ Cloud-based Web GIS for mapping and analyzing spatial accessibility to health fa
 
 ## Data Sources
 - OpenStreetMap (Geofabrik)
-- Health facilities and road networks
-- Nairobi administrative boundaries
+- The Humanitarian Data Exchange
+- World Bank Open Data
 
 ## License
 <p>
