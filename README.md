@@ -1,2 +1,38 @@
-# nairobi-health-accessibility-gis
-Cloud-Based Web GIS for Mapping Health Facility Accessibility in Nairobi, Kenya.
+# Health Facility Accessibility in Nairobi, Kenya
+
+Cloud-based Web GIS for mapping and analyzing spatial accessibility to health facilities in Nairobi.
+
+## Key Findings
+- **505 health facilities** mapped (147 hospitals, 350 clinics)
+- **95.38 km² underserved areas** identified (13.5% of Nairobi)
+- **100% road access** to all facilities
+- **5km service area analysis** completed
+
+## Live Map
+[View Interactive Map]([https://YOUR_USERNAME.github.io/nairobi-health-accessibility-gis/webmap/](https://bree479.github.io/nairobi-health-accessibility-gis))
+
+## Technologies Used
+- PostgreSQL/PostGIS (Neon cloud database)
+- QGIS for spatial analysis
+- QGIS2Web for interactive web map
+- OpenStreetMap data
+- Leaflet.js
+
+## Data Sources
+- OpenStreetMap (Geofabrik)
+- Health facilities and road networks
+- Nairobi administrative boundaries
+
+## License
+<p>
+    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener">
+        <img src="https://licensebuttons.net/l/by/4.0/88x31.png" alt="CC BY 4.0 License" />
+    </a>
+</p>
+<p>
+    "This Cloud-based Open-source GIS Application is developed by Brenda Kipserem"
+    <br>
+    Data sources: OpenStreetMap contributors, WorldPop population estimates, Kenya Open Data Portal.
+    <br>
+    Source code available on GitHub.
+</p>
