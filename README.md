@@ -9,8 +9,8 @@ Cloud-based Web GIS for mapping and analyzing spatial accessibility to health fa
 - **5km service area analysis** completed
 
 ## Live Map
-<p align="center">
-  <a href="https://bree479.github.io/nairobi-health-accessibility-gis/webmap/" target="_blank">
+<p align="left">
+  <a href="https://bree479.github.io/nairobi-health-accessibility-gis/#11/" target="_blank">
     <img src="https://img.shields.io/badge/🗺️-View_Interactive_Map-blue?style=for-the-badge" alt="View Map">
   </a>
 </p>
