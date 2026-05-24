@@ -22,11 +22,6 @@ Cloud-based Web GIS for mapping and analyzing spatial accessibility to health fa
 - OpenStreetMap data
 - Leaflet.js
 
-## Data Sources
-- OpenStreetMap (Geofabrik)
-- The Humanitarian Data Exchange
-- World Bank Open Data
-
 ## License
 <p>
     <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener">
